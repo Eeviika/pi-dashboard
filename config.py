@@ -41,13 +41,9 @@ def setup_base_dir() -> bool:
         return False
 
 
-def config_file_exists() -> bool:
-    return os.path.exists(CONFIG_FILE)
-
-
 def load_config() -> None:
     config.read_dict(DEFAULT_CONFIG)
-    if config_file_exists():
+    if CONFIG_FILE.exists():
         config.read(CONFIG_FILE)
 
 
