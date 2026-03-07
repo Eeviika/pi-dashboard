@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from fastapi import FastAPI
 
 from config import load_config, setup_base_dir
 from logging_cfg import setup_logging
@@ -10,4 +10,4 @@ if not setup_base_dir():
 load_config()
 setup_logging()
 
-app = Flask(__name__)
+app = FastAPI()
