@@ -2,7 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
-from config import get_config, DEFAULT_CONFIG
+from config import get_config, DEFAULT_CONFIG, BASE_DIR
 
 log_file = Path("logs/dashboard.log")
 log_level = logging.INFO
@@ -12,7 +12,8 @@ def setup_logging():
     global log_level
     config = get_config()
 
-    log_file = config.get("logging", "log_file", fallback=DEFAULT_CONFIG["logging"]["log_file"])
+    log_file = Path.joinpath(BASE_DIR,
+                             config.get("logging", "log_file", fallback=DEFAULT_CONFIG["logging"]["log_file"]))
     log_level = config.get("logging", "level", fallback=DEFAULT_CONFIG["logging"]["level"])
 
     root_logger = logging.getLogger()
