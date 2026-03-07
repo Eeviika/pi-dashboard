@@ -35,7 +35,6 @@ def config_file_exists() -> bool:
 
 
 def load_config() -> None:
-    logger.log(logging.INFO, "Loading default config...")
     config.read_dict(DEFAULT_CONFIG)
     if config_file_exists():
         config.read(CONFIG_FILE)
