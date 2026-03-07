@@ -1,7 +1,7 @@
 import configparser
 import logging
-import os
 from configparser import ConfigParser
+from pathlib import Path
 
 from cockpit.config import XDG_CONFIG_HOME
 
@@ -9,8 +9,8 @@ logger = logging.getLogger("ConfigManager")
 config = configparser.ConfigParser()
 
 LITERAL_BASE = "pi/dashboard"
-BASE_DIR = os.path.join(os.path.expanduser(XDG_CONFIG_HOME), LITERAL_BASE)
-CONFIG_FILE = os.path.join(BASE_DIR, "server.cfg")
+BASE_DIR = Path(XDG_CONFIG_HOME) / LITERAL_BASE
+CONFIG_FILE = BASE_DIR / "server.cfg"
 
 DEFAULT_CONFIG = {
     "server": {
@@ -31,10 +31,10 @@ DEFAULT_CONFIG = {
 
 
 def setup_base_dir() -> bool:
-    if os.path.exists(BASE_DIR):
+    if BASE_DIR.exists():
         return True
     try:
-        os.makedirs(BASE_DIR)
+        BASE_DIR.mkdir(parents=True)
         return True
     except OSError as e:
         print(e)

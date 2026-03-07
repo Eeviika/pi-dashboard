@@ -12,9 +12,11 @@ def setup_logging():
     global log_level
     config = get_config()
 
-    log_file = Path.joinpath(BASE_DIR,
-                             config.get("logging", "log_file", fallback=DEFAULT_CONFIG["logging"]["log_file"]))
-    log_level = config.get("logging", "level", fallback=DEFAULT_CONFIG["logging"]["level"])
+    config_log_file = Path(config.get("logging", "log_file", fallback=DEFAULT_CONFIG["logging"]["log_file"]))
+    config_log_level = config.get("logging", "level", fallback=DEFAULT_CONFIG["logging"]["level"])
+
+    log_file = BASE_DIR / config_log_file
+    log_level = config_log_level
 
     root_logger = logging.getLogger()
     root_logger.setLevel(log_level)
