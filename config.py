@@ -30,6 +30,17 @@ DEFAULT_CONFIG = {
 }
 
 
+def setup_base_dir() -> bool:
+    if os.path.exists(BASE_DIR):
+        return True
+    try:
+        os.makedirs(BASE_DIR)
+        return True
+    except OSError as e:
+        print(e)
+        return False
+
+
 def config_file_exists() -> bool:
     return os.path.exists(CONFIG_FILE)
 
