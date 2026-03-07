@@ -2,7 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
-LOG_FILE = Path("dashboard.log")
+LOG_FILE = Path("logs/dashboard.log")
 LOG_LEVEL = logging.INFO
 
 
