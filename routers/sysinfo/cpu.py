@@ -3,7 +3,7 @@ from pathlib import Path
 import psutil
 from fastapi import APIRouter
 
-router = APIRouter(prefix="/cpu", tags=["System Information"])
+router = APIRouter(prefix="/cpu", tags=["System Information", "CPU Information"])
 
 
 def get_cpu_temp():
