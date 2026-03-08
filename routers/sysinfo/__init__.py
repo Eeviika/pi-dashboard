@@ -10,5 +10,5 @@ router.include_router(mem.router)
 async def sys_info():
     return {
         "cpu": cpu.get_cpu_info(),
-        "mem": mem.memory_info()
+        "mem": mem.get_memory_info()
     }
