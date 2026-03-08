@@ -1,9 +1,10 @@
 import configparser
 import logging
+import os
 from configparser import ConfigParser
 from pathlib import Path
 
-from cockpit.config import XDG_CONFIG_HOME
+XDG_CONFIG_HOME = Path(os.getenv('XDG_CONFIG_HOME') or os.path.expanduser('~/.config'))
 
 logger = logging.getLogger("ConfigManager")
 config = configparser.ConfigParser()
