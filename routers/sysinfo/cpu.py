@@ -3,7 +3,7 @@ from pathlib import Path
 import psutil
 from fastapi import APIRouter
 
-router = APIRouter(prefix="/api/sysinfo", tags=["System Information"])
+router = APIRouter(prefix="/cpu", tags=["System Information"])
 
 
 def get_cpu_temp():
@@ -27,27 +27,20 @@ def get_cpu_info():
 
 
 @router.get("/")
-async def sysinfo():
-    return {
-        "cpu": get_cpu_info()
-    }
-
-
-@router.get("/cpu")
 async def cpu_info():
     return get_cpu_info()
 
 
-@router.get("/cpu/temp")
+@router.get("/temp")
 async def cpu_temp():
     return get_cpu_temp()
 
 
-@router.get("/cpu/usage")
+@router.get("/usage")
 async def cpu_usage():
     return get_cpu_usage()
 
 
-@router.get("/cpu/freq")
+@router.get("/freq")
 async def cpu_freq():
     return get_cpu_freq()
