@@ -1,0 +1,45 @@
+All of these will probably be descendants of [pi-ip-address]/api (/api) or at some subdomain like api.[pi-ip-address], whichever is easier
+
++ /coffee -> Returns HTTP 418
++ /tea -> Returns HTTP 202
+
++/sysinfo -> Returns a JSON object of all /sysinfo related endpoints, or HTTP (207? 502?) if an endpoint's info cannot be grabbed; note that this doesn't actually make any HTTP calls to itself, it just calls the resulting code said endpoints would call
++	/cpu -> Returns CPU related information, such as temp, usage, and frequency;
++		/temp -> Returns CPU temp
++		/usage -> Returns CPU usage
++		/freq -> Returns CPU frequency
++    /mem -> Returns information relating to memory
++	    /virtual -> Returns information relating to virtual memory
++		    /used -> Returns all system's used RAM
++		    /free -> Returns all system's free RAM (some of this RAM may be cache RAM)
++		    /total -> Returns the total amount of RAM this system supports
++	    /swap -> Returns information relating to swap memory
++		    /used -> Returns all swap's used RAM
++		    /free -> Returns all swap's free RAM (some of this RAM may be cache RAM)
++		    /total -> Returns the total amount of RAM this swap supports
++	/uptime -> Returns the amount of time this system has been up
+
+/apt -> Doesn't return anything, use endpoints below
+	/can-upgrade -> Returns whether `apt` can upgrade packages
+	/upgradeable -> Returns what `apt` packages can be upgraded
+	/upgrade -> Requires auth token; tells the system to upgrade its packages; returns HTTP 202
+	/install -> Requires auth token; tells the system to install a package; returns HTTP 202 if installation begun, or HTTP 409 if it's already installed / cannot be found
+	/remove -> Requires auth token; tells the system to remove a package; returns HTTP 202 if removal begun, or HTTP 409 if it doesn't exist / cannot be removed
+	/update -> Requires auth token; Updates apt's cache and returns 200 unless apt cannot update for some reason (in which case, HTTP 500).
+
+/server -> Returns nothing, use below
+	/reboot -> Requires supervisor auth token; reboots the machine
+	/power-off -> Requires supervisor auth token; powers off the machine
+	/restart -> Requires supervisor auth token; Restarts the web server by killing this process (systemd will spawn a new one)
+	/check -> Checks the status of the server
+
+/users -> See below
+	/add-temp -> Creates a new user for this session and returns a user token; for the moments when I don't want to make a username i just want to see if the dashboard works
+	/add -> Given a username, creates a new user permanently and returns the user login token
+	/login -> Given a username and a login token, creates and returns the user token
+	/logout -> Given a username and a user token, destroys the user token, effectively logging them out
+	/status -> Given a username, checks if the user has a user token or not (aka, are they "logged in", doesn't return the user token);
+	/is-token-good -> Given a user token, checks if its valid
+	/has-token -> Given a username, returns a boolean indicating whether that user has a user token already or not
+	/kick-all -> Given the supervisor user token; Destroys all user tokens.
+	/purge-all -> Given the supervisor user token; destroys all user accounts (aka, login tokens and usernames; effectively deletes all accounts)
