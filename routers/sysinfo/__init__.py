@@ -4,7 +4,7 @@ router = APIRouter(prefix="/api/sysinfo", tags=["System Information"])
 from . import cpu, mem
 
 router.include_router(cpu.router)
-
+router.include_router(mem.router)
 
 @router.get("/")
 async def sys_info():
