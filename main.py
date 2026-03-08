@@ -23,4 +23,9 @@ async def get_api():
     return RedirectResponse(url="/docs")
 
 
+@app.get("/api/")
+async def get_api():
+    return RedirectResponse(url="/docs")
+
+
 app.mount("/", StaticFiles(directory="static", html=True), name="static")

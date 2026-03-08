@@ -1,13 +1,17 @@
 from fastapi import APIRouter, HTTPException
 
-router = APIRouter(prefix="/api/teapot", tags=["Teapot"])
+router = APIRouter(prefix="/api/teapot", tags=["Teapot"], redirect_slashes=True)
 tea_ml = 0
+
+
+@router.get("", status_code=418)
+async def root():
+    return "Hello, I am a teapot."
 
 
 @router.get("/", status_code=418)
 async def root():
     return "Hello, I am a teapot."
-
 
 @router.get("/coffee", status_code=418)
 async def im_a_teapot():
@@ -29,7 +33,7 @@ async def brew_tea():
 
 
 @router.get("/drain", status_code=200)
-async def brew_tea():
+async def drain_teapot():
     global tea_ml
 
     if tea_ml == 0:
