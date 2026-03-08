@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 router = APIRouter(prefix="/api/sysinfo", tags=["System Information"])
-from . import cpu
+from . import cpu, mem
 
 router.include_router(cpu.router)
 
