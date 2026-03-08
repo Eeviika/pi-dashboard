@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-router = APIRouter(prefix="/api/teapot", tags=["System Information", "Memory Information"])
+router = APIRouter(prefix="/api/teapot", tags=["Teapot"])
 tea_ml = 0
 
 
