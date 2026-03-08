@@ -9,5 +9,6 @@ router.include_router(mem.router)
 @router.get("/")
 async def sys_info():
     return {
-        "cpu": cpu.get_cpu_info()
+        "cpu": cpu.get_cpu_info(),
+        "mem": mem.memory_info()
     }
